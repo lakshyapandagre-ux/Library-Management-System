@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS - Premium Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Notification Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Navigation Bar -->
+    <header class="navbar glass">
+        <div class="logo">
+            <span class="logo-icon">⚡</span>
+            <span class="logo-text">LMS <span class="accent">Pro</span></span>
+        </div>
+        <nav class="nav-links">
+            <a href="#hero" class="nav-link active">Home</a>
+            <a href="#dashboard" class="nav-link">Dashboard</a>
+            <a href="#books-section" class="nav-link">Inventory</a>
+        </nav>
+        <button class="cta-btn sm-hide" onclick="location.href='#dashboard'">Get Started</button>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h1 class="bounce-in">Master Your <span class="gradient-text">Library</span> <br> With Zero Effort.</h1>
+                <p class="fade-in-up">A futuristic experience for managing books, students, and inventory. Experience
+                    the power of simplicity.</p>
+                <div class="hero-actions fade-in-up">
+                    <button class="cta-btn large" onclick="scrollToSection('dashboard')">Launch Dashboard</button>
+                    <button class="secondary-btn" onclick="scrollToSection('books-section')">View Inventory</button>
+                </div>
+            </div>
+            <!-- Decorative Background Elements -->
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+        </section>
+
+        <!-- Dashboard / Actions Grid -->
+        <section id="dashboard" class="dashboard-section">
+            <div class="section-header">
+                <h2>Quick Actions</h2>
+                <p>Manage your ecosystem efficiently.</p>
+            </div>
+
+            <div class="cards-grid">
+                <!-- Add Book Card -->
+                <div class="card glass hover-card" onclick="openModal('modal-add')">
+                    <div class="card-icon glow-purple">📚</div>
+                    <h3>Add Book</h3>
+                    <p>Register new arrivals to the catalog.</p>
+                </div>
+
+                <!-- Issue Book Card -->
+                <div class="card glass hover-card" onclick="openModal('modal-issue')">
+                    <div class="card-icon glow-blue">🎓</div>
+                    <h3>Issue Book</h3>
+                    <p>Lend books to students seamlessly.</p>
+                </div>
+
+                <!-- Return Book Card -->
+                <div class="card glass hover-card" onclick="openModal('modal-return')">
+                    <div class="card-icon glow-cyan">↩️</div>
+                    <h3>Return Book</h3>
+                    <p>Process returned books instantly.</p>
+                </div>
+
+                <!-- Delete Book Card -->
+                <div class="card glass hover-card" onclick="openModal('modal-delete')">
+                    <div class="card-icon glow-red">🗑️</div>
+                    <h3>Delete Book</h3>
+                    <p>Remove outdated records.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inventory / Table Section -->
+        <section id="books-section" class="books-section glass-panel">
+            <div class="section-header row-between">
+                <h2>Live Inventory</h2>
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Search books..." onkeyup="filterBooks()">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table id="books-table">
+                    <thead>
+                        <tr>
+                            <th>Book ID</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Qty</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ACADEMIC INFO SECTION (NEW) -->
+        <section class="academic-section fade-in-up">
+            <div class="academic-container">
+                <!-- Left: Team Members -->
+                <div class="card glass team-card">
+                    <h3>Submitted By</h3>
+                    <div class="team-list">
+                        <div class="team-member">
+                            <span class="member-name">Vaidehi Choudhary</span>
+                            <span class="member-id">0832CI241126</span>
+                        </div>
+                        <div class="team-member">
+                            <span class="member-name">Tejasvi Thakur</span>
+                            <span class="member-id">0832CI241123</span>
+                        </div>
+                        <div class="team-member">
+                            <span class="member-name">Tulika Srivastava</span>
+                            <span class="member-id">0832CI241124</span>
+                        </div>
+                        <div class="team-member">
+                            <span class="member-name">Umesh Choudhary</span>
+                            <span class="member-id">0832CI241125</span>
+                        </div>
+                        <div class="team-member">
+                            <span class="member-name">Vaidika Gurjar</span>
+                            <span class="member-id">0832CI241127</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Details -->
+                <div class="details-column">
+                    <div class="card glass info-card">
+                        <h3>Subject</h3>
+                        <p class="highlight-text">Data Structures</p>
+                    </div>
+                    <div class="card glass info-card">
+                        <h3>Submitted To</h3>
+                        <p class="highlight-text">Dr. Ankit Chakrawati</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER (Updated) -->
+    <footer>
+        <div class="footer-pill glass">
+            Made by Vaidehi Choudhary
+        </div>
+    </footer>
+
+    <!-- MODALS (Overlays) -->
+    <div id="modal-overlay" class="modal-overlay hidden"></div>
+
+    <!-- Add Book Modal -->
+    <div id="modal-add" class="modal glass hidden">
+        <div class="modal-header">
+            <h3>Add New Book</h3>
+            <button class="close-btn" onclick="closeAllModals()">×</button>
+        </div>
+        <form id="form-add">
+            <div class="input-group">
+                <label>Book ID</label>
+                <input type="text" id="add-id" placeholder="e.g. B-101" required>
+            </div>
+            <div class="input-group">
+                <label>Book Title</label>
+                <input type="text" id="add-name" placeholder="Title of the book" required>
+            </div>
+            <div class="input-group">
+                <label>Author</label>
+                <input type="text" id="add-author" placeholder="Author name" required>
+            </div>
+            <div class="input-group">
+                <label>Quantity</label>
+                <input type="number" id="add-qty" placeholder="10" min="1" required>
+            </div>
+            <button type="submit" class="cta-btn full-width">Add to Library</button>
+        </form>
+    </div>
+
+    <!-- Issue Book Modal -->
+    <div id="modal-issue" class="modal glass hidden">
+        <div class="modal-header">
+            <h3>Issue Book</h3>
+            <button class="close-btn" onclick="closeAllModals()">×</button>
+        </div>
+        <form id="form-issue">
+            <div class="input-group">
+                <label>Book ID</label>
+                <input type="text" id="issue-id" placeholder="B-101" required>
+            </div>
+            <div class="input-group">
+                <label>Student Name</label>
+                <input type="text" id="issue-student" placeholder="John Doe" required>
+            </div>
+            <button type="submit" class="cta-btn full-width">Confirm Issue</button>
+        </form>
+    </div>
+
+    <!-- Return Book Modal -->
+    <div id="modal-return" class="modal glass hidden">
+        <div class="modal-header">
+            <h3>Return Book</h3>
+            <button class="close-btn" onclick="closeAllModals()">×</button>
+        </div>
+        <form id="form-return">
+            <div class="input-group">
+                <label>Book ID</label>
+                <input type="text" id="return-id" placeholder="B-101" required>
+            </div>
+            <button type="submit" class="cta-btn full-width">Process Return</button>
+        </form>
+    </div>
+
+    <!-- Delete Book Modal -->
+    <div id="modal-delete" class="modal glass hidden">
+        <div class="modal-header">
+            <h3>Delete Book</h3>
+            <button class="close-btn" onclick="closeAllModals()">×</button>
+        </div>
+        <form id="form-delete">
+            <div class="input-group">
+                <label>Book ID</label>
+                <input type="text" id="delete-id" placeholder="B-101" required>
+            </div>
+            <div class="warning-text">⚠️ This action cannot be undone.</div>
+            <button type="submit" class="cta-btn full-width danger-btn">Delete Permanently</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
